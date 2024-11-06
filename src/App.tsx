@@ -43,7 +43,6 @@ function App() {
       const url = `${API_WEATHER}${textCity}`;
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data)
       if (data.error) throw { message: data.error.message };
 
       setResponseApi({
@@ -54,16 +53,21 @@ function App() {
         icon: data.current.condition.icon,
         conditionText: data.current.condition.text,
       });
-      console.log(responseApi);
     } catch (error) {
       setLoading(false);
-      setError({
-        error: true,
-        message: error.message,
-      });
+      if (error instanceof Error){
+        setError({
+          error: true,
+          message: error.message,
+        });
+      }else {
+        setError({
+          error: true,
+          message: "Ocurrió un error desconocido",
+        });
+      }
     } finally {
       setLoading(false);
-      console.log("siempre se ejecuta despues de lo que hay en el try");
     }
   };
 
