@@ -1,18 +1,15 @@
-version: '3.8'
-
 services:
   front:
-    build: ./
+    build:
+      context: ./
     container_name: clima-app
+    restart: always
     expose:
       - 3000
-    volumes:
-      - ./:/usr/src/app
-    #ports:
-    #  - 80:3000
-    restart: always
-    networks:
-      -proxy
-networks:
-  proxy:
-    external: true
+    ports:
+      - 81:5173
+#    networks:
+#      -proxy
+#networks:
+#  proxy:
+#    external: true

@@ -1,15 +1,19 @@
-FROM node:20.18.0
+FROM node:20.18.0 as builder
 
 WORKDIR /app
 
-COPY . /app
+COPY . .
 
 RUN npm install 
 
-RUN npm i -g serve
-
 RUN npm run build
 
-EXPOSE 3000
+FROM node:latest 
+
+COPY --from=builder /app/dist /app/dist
+
+RUN npm i -g serve
+
+EXPOSE 5173
 
 CMD ["serve", "-s", "build"]
