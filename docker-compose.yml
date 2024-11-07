@@ -7,7 +7,7 @@ services:
     expose:
       - 3000
     ports:
-      - 81:5173
+      - 81:3000
 #    networks:
 #      -proxy
 #networks:

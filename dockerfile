@@ -14,6 +14,6 @@ COPY --from=builder /app/dist /app/dist
 
 RUN npm i -g serve
 
-EXPOSE 5173
+EXPOSE 3000
 
-CMD ["serve", "-s", "build"]
+CMD ["serve", "-s", "/app/dist", "-l", "3000"]
